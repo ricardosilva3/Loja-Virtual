@@ -3,15 +3,34 @@
 <head>
 <title>Pijamas da Bruna</title>
 <meta charset="utf-8" />
+
+<style>
+ #Produtos,
+ #Carrinho{
+     max-width: 900px;
+     margin:0 auto;
+     padding: 0 2%;
+     display: flex;
+
+ }   
+
+ .produto-single{
+     width: 33.3%;
+     padding: 0 20px;
+ }
+
+
+</style>
+
 </head>
 
 <body>
     <div id="produtos">
-
+      <h2>Vitrine:</h2>
     </div><!--produtos-->
 
     <div id="carrinho">
-
+      <h2>Carrinho</h2>
     </div><!--carrinho-->
     
     <Script>
@@ -36,13 +55,58 @@
                 img: 'Pijama Marie.png',
                 quantidade: 0
 
-            }
+            },
 
 
 
         
         
         ]
+
+
+
+        function inicializarLoja(){
+             var containerProdutos = document.getElementById("produtos");
+             items.map((vaL)=>{
+                 containerProdutos.innerHTML+= `
+                 
+                 <div class='produto-single'>
+                    <img src="`+vaL.img+`" width=300 height=200 />
+                    <p>`+vaL.nome+` </p>
+                    <a key= "`+vaL.id+`" href="#">Adicionar ao carrinho<a/>
+                 </div> 
+                
+                 
+                 
+                 
+                 `;
+                 
+                 
+                 
+                 
+             })
+        }
+
+        inicializarLoja();
+
+        atualizarCarrinho = () => {
+
+        }
+
+        var links = document.getElementsByTagName('a'); 
+
+        for(var i = 0; i < links.length; i++){
+            links[i].addEventListener("click",function(){
+               let key = this.getAttribute('key');
+               items[key].quantidade++;
+               atualizarCarrinho();
+               return false;
+            })
+        }
+
+
+        
+
 
         
             
